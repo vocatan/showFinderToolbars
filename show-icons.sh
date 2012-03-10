@@ -11,9 +11,9 @@ defaults read com.apple.finder \
 ls -l /tmp/showToolbar.$$
 
 cat /tmp/showToolbar.$$ | while read line; do
-  FILE=`echo $line | sed -e 's/^.*localhost/"/' |sed -e 's/;//' | sed -e 's/%20/ /g'`
+  FILE=`echo $line | sed -e 's/^.*localhost/"/' |sed -e 's/;//' | sed -e 's/%20/ /g' |sed -e 's/^"//' -e 's/"$//'`
   echo file: $FILE
-  if [ ! -r $FILE ]; then
+  if [ ! -r "$FILE" ]; then
       echo "WARNING: file $FILE doesn't exist"
   fi
 done
